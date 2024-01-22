@@ -7,7 +7,8 @@ from helpers import (
     update_player,
     delete_player,
     list_all_levels,
-    new_game
+    new_game,
+    player_avg_accuracy
 )
 
 from models.player import Player
@@ -102,7 +103,7 @@ def main():
         elif choice == "5":
             list_all_levels()
         elif choice == "6":
-            pass
+            player_avg_accuracy()
         elif choice == "7":
             pass
         elif choice == "8":
@@ -119,7 +120,7 @@ def menu():
     print("3. Update player")
     print("4. Delete player")
     print("5. List all levels")
-    print("6. Player avg accuracy and speed")
+    print("6. Player average accuracy")
     print("7. List of players by avg accuracy")
     print("8. List of players by avg speed")
 

@@ -3,6 +3,10 @@ from models.player import Player
 from models.level import Level
 from models.game import Game
 
+def exit_program():
+    print("Goodbye!")
+    exit()
+
 def create_new_player():
     name = input("What's your name? ")
     player = Player.create(name)
@@ -46,6 +50,10 @@ def list_all_levels():
     for level in Level.get_all():
         print(level)
 
-def exit_program():
-    print("Goodbye!")
-    exit()
+def player_avg_accuracy():
+    _id = input("Enter player id: ")
+
+    if player := Player.find_by_id(_id):
+        print(player.get_avg_accuracy())
+    else:
+        print("Player could not be found")
