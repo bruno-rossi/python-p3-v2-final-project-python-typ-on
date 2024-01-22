@@ -1,6 +1,4 @@
 from models.__init__ import (CONN, CURSOR)
-from models.player import Player
-from models.level import Level
 
 class Game:
 

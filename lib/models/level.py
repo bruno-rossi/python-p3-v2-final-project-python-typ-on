@@ -1,4 +1,5 @@
 from models.__init__ import CONN, CURSOR
+from models.game import Game
 
 class Level:
 
@@ -141,3 +142,6 @@ class Level:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    def games(self):
+        return [game for game in Game.all_games if game.player_id == self.id]

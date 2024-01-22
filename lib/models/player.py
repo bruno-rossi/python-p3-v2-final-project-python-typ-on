@@ -1,10 +1,13 @@
 from models.__init__ import (CONN, CURSOR)
+from models.game import Game
+from models.level import Level
 
 class Player:
 
     all_players = {}
 
-    def __init__(self, name):
+    def __init__(self, name, id=None):
+        self.id = id
         self.name = name
 
     @property
@@ -146,3 +149,32 @@ class Player:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    # get list of games the player has played:
+    def games(self):
+        """Return a list of Games played by the current instance"""
+        from models.game import Game
+        sql = """
+            SELECT *
+            FROM games
+            WHERE player_id is ?
+        """
+
+        CURSOR.execute(sql, (self.id,),)
+
+        rows = CURSOR.fetchall()
+        return [
+            Game.instance_from_db(row) for row in rows
+        ]
+    
+    def highest_level_played(self):
+        highest_level_id = max([game.level_id for game in self.games()])
+        return Level.find_by_id(highest_level_id)
+    
+    def get_avg_accuracy(self):
+        games_accuracy = [game.accuracy for game in self.games()]
+        return sum(games_accuracy) / len(games_accuracy)
+    
+    def get_avg_time(self):
+        games_times = [game.time for game in self.games()]
+        return sum(games_times) / len(games_times)
