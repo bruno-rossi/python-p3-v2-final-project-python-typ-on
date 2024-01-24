@@ -143,5 +143,5 @@ class Level:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
-    def games(self):
-        return [game for game in Game.all_games if game.player_id == self.id]
+    # def games(self):
+    #     return [game for game in Game.all_games if game.player_id == self.id]
