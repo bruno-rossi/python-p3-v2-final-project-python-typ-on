@@ -14,6 +14,7 @@ class Game:
     def __repr__(self) -> str:
         return f"<Game Level: {self.level_id}>"
 
+    # Class method to create a table for games:
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Game instances """
@@ -30,6 +31,7 @@ class Game:
         CURSOR.execute(sql)
         CONN.commit()
 
+    # Class method to drop the table for games:
     @classmethod
     def drop_table(cls):
         """ Drop the table that persists Game instances """
@@ -39,6 +41,7 @@ class Game:
         CURSOR.execute(sql)
         CONN.commit()
 
+    # Instance method to save a new row in the games table:
     def save(self):
         """ Insert a new row with the values of the current Level instance.
         Update object id attribute using the primary key value of new row.
@@ -57,6 +60,7 @@ class Game:
         # Saves the instance to the "all_levels" dictionary:
         type(self).all_games[self.id] = self
 
+    # Class method to create a new game instance, calling save()
     @classmethod
     def create(cls, player_id, level_id, player_input, time, accuracy):
         """ Initialize a new Game instance and save the object to the database """
@@ -64,6 +68,7 @@ class Game:
         game.save()
         return game
     
+    # Class method to update a new game instance
     def update(self):
         """Update the table row corresponding to the current Level instance."""
         sql = """
@@ -74,6 +79,7 @@ class Game:
         CURSOR.execute(sql, (self.player_id, self.level_id, self.player_input, self.time, self.accuracy))
         CONN.commit()
 
+    # Class method to delete a new game instance
     def delete(self):
         """Delete the table row corresponding to the current Game instance,
         delete the dictionary entry, and reassign id attribute"""
@@ -92,6 +98,7 @@ class Game:
         # Set the id to None
         self.id = None
 
+    # Class method to instantiate a Game object from the db:
     @classmethod
     def instance_from_db(cls, row):
         """Return a Game object having the attribute values from the table row."""
@@ -112,6 +119,7 @@ class Game:
             cls.all_games[game.id] = game
         return game
 
+    # Class method to get all games from db and instantiate them:
     @classmethod
     def get_all(cls):
         """Return a list containing a Game object per row in the table"""

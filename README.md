@@ -1,172 +1,56 @@
-# Phase 3 CLI+ORM Project Template
 
-## Learning Goals
+# Phase 3 CLI+ORM Project: Python Typ-On
+Welcome to Python Typ-on, a command-line project that puts your typing skills to the test using Object-Oriented Python! In Python Typ-On, your challenge is to advance through the levels, typing the provided sentences with accuracy and speed.
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+The levels get progressively harder the longer you play.
 
----
+For each game you play, Python Typ-On shows the mistakes you made, and calculates your typing accuracy and speed.
 
-## Introduction
+The games and stats are then saved to an SQLite database, allowing you to see your overall average.
 
-You now have a basic idea of what constitutes a CLI. Fork and clone this lesson
-for a project template for your CLI.
+**Table of contents:**
+- [1. Introduction][#introduction]
+- [2. Features][#features]
+- [3. Installation][#installation]
+- [4. Usage][#usage]
+- [5. Feedback and Support][#feedback]
 
-Take a look at the directory structure:
+<a id="introduction"></a>
 
-```console
-.
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-└── lib
-    ├── models
-    │   ├── __init__.py
-    │   └── model_1.py
-    ├── cli.py
-    ├── debug.py
-    └── helpers.py
-```
+## 1. Introduction
+Python Typ-On is a fun and interactive project built in Python. The command-line interface makes it easy to play.
 
-Note: The directory also includes two files named `CONTRIBUTING.md` and
-`LICENSE.md` that are specific to Flatiron's curriculum. You can disregard or
-delete the files if you want.
+<a id="features"></a>
 
----
+## 2. Features
+- **New Game:** When starting a new game, you will be prompted to enter your name. Then, you will enter a loop of games. In each game, you are given a sentence and expected to type it out as an input.
+- **Difference highlight:** After you enter an input sentence, the game calculates the difference between the provided sentence and your input. Correct characters are displayed in green, and mistakes are displayed in red. If you missed a key, it's displayed with a minus sign ("-"), and if you aded an extra key, it's displayed with a plus sign ("+").
+- **Typing accuracy:** The typing accuracy is calculated based on the ratio between the provided sentence and your input.
+- **Typing speed:** A timer starts when the sentence is shown, and ends when you finish your input. This is your typing time.
+- **Stats:** The Stats feature contains a leaderboard showcasing all the players along with their average typing accuracy, average typing speed, and the highest level played. The leaderboard is sorted by average accuracy in descending order (from highest to lowest).
+- **List all levels:** Prints a list of all available levels in the game.
 
-## Generating Your Environment
+<a id="installation"></a>
 
-You might have noticed in the file structure- there's already a Pipfile!
+## 3. Installation
+To run Python Typ-On on your local machine, follow these steps:
 
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
+Clone the repository from GitHub Repo URL.
 
-```console
-pipenv install
-pipenv shell
-```
+Navigate to the project directory.
 
----
+Install the required dependencies (SQLite support is included in Python's standard library, so no additional installations are needed): `pip install` or `pipenv install`
 
-## Generating Your CLI
+<a id="usage"></a>
 
-A CLI is, simply put, an interactive script and prompts the user and performs
-operations based on user input.
+## 4. Usage
+Once installed, you can start Python Typ-On from the command line: python cli.py
 
-The project template has a sample CLI in `lib/cli.py` that looks like this:
+The main menu will guide you through the available options.
 
-```py
-# lib/cli.py
+<a id="feedback"></a>
 
-from helpers import (
-    exit_program,
-    helper_1
-)
+## 5. Feedback and Support
+We hope you enjoy the game! If you encounter any issues, have suggestions for improvement, or need assistance, please feel free to reach out.
 
-
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Invalid choice")
-
-
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
-
-
-if __name__ == "__main__":
-    main()
-```
-
-The helper functions are located in `lib/helpers.py`:
-
-```py
-# lib/helpers.py
-
-def helper_1():
-    print("Performing useful function#1.")
-
-
-def exit_program():
-    print("Goodbye!")
-    exit()
-```
-
-You can run the template CLI with `python lib/cli.py`, or include the shebang
-and make it executable with `chmod +x`. The template CLI will ask for input, do
-some work, and accomplish some sort of task.
-
-Past that, CLIs can be whatever you'd like, as long as you follow the project
-requirements.
-
-Of course, you will update `lib/cli.py` with prompts that are appropriate for
-your application, and you will update `lib/helpers.py` to replace `helper_1()`
-with a useful function based on the specific problem domain you decide to
-implement, along with adding other helper functions to the module.
-
-In the `lib/models` folder, you should rename `model_1.py` with the name of a
-data model class from your specific problem domain, and add other classes to the
-folder as needed. The file `lib/models/__init__.py` has been initialized to
-create the necessary database constants. You need to add import statements to
-the various data model classes in order to use the database constants.
-
-You are also welcome to implement a different module and directory structure.
-However, your project should be well organized, modular, and follow the design
-principal of separation of concerns, which means you should separate code
-related to:
-
-- User interface
-- Data persistence
-- Problem domain rules and logic
-
----
-
-## Updating README.md
-
-`README.md` is a Markdown file that should describe your project. You will
-replace the contents of this `README.md` file with a description of **your**
-actual project.
-
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this assignments's resources for a basic guide to Markdown.
-
-### What Goes into a README?
-
-This README serves as a template. Replace the contents of this file to describe
-the important files in your project and describe what they do. Each Python file
-that you edit should get at least a paragraph, and each function should be
-described with a sentence or two.
-
-Describe your actual CLI script first, and with a good level of detail. The rest
-should be ordered by importance to the user. (Probably functions next, then
-models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
-
-## Conclusion
-
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
-
-Happy coding!
-
----
-
-## Resources
-
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+Thank you for playing! Happy typing!

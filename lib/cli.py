@@ -7,8 +7,8 @@ from helpers import (
     update_player,
     delete_player,
     list_all_levels,
-    new_game,
-    player_avg_accuracy
+    # player_avg_accuracy,
+    # player_avg_time
 )
 
 from models.player import Player
@@ -20,8 +20,8 @@ import time
 
 def main():
     while True:
-        print("---Python Type-On---")
-        print("Welcome to Python Type-On!")
+        cprint("---Python Type-On---", "white", "on_yellow")
+        print("Welcome to Python Type-On! For each level, type in the provided sentence. The game will calculate your typing accuracy and speed.")
         
         menu()
         choice = input("> ")
@@ -41,10 +41,18 @@ def main():
                     current_level = Level.find_by_id(level)
 
                     if current_level == None:
-                        print("Congrats, you've reached the end of the game!")
+                        cprint(f"Congrats, you've reached the end of the game! Your average accuracy is {player.get_avg_accuracy()}", "black", "on_green")
                         exit()
 
-                    print(f"{current_level.name} - {current_level.difficulty}")
+                    print(f"Level {current_level.name} - {current_level.difficulty}")
+                    print("When prompted, type the provided sentence")
+
+                    print("Ready?")
+                    time.sleep(1)
+                    print("Set...")
+                    time.sleep(1)
+                    print("Type the following:")
+                    time.sleep(0.5)
                     cprint(current_level.string, "cyan")
 
                     #start timer
@@ -73,56 +81,63 @@ def main():
 
                     #print game results (player input, time and accuracy)
                     print(''.join(formatted_result))
-                    print(f"Accuracy: {accuracy}%")
-                    print(f"Speed: {speed} seconds")
+                    cprint(f"Accuracy: {accuracy:.2f}%", "yellow")
+                    cprint(f"Speed: {speed:.2f} seconds", "yellow")
 
                     if accuracy < 80:
-                        try_again = input("Your accuracy was less than 80%. Would you like to try again? ")
-                        if try_again == "Y":
+                        try_again = input("Your accuracy was less than 80%. Would you like to try again? Y/N > ")
+                        if try_again == "Y" or try_again == "":
                             level
                         elif try_again == "N":
-                            exit()
+                            time.sleep(1)
+                            player = None
+                            cprint("Now returning to main menu.", "magenta")
+                            time.sleep(1)
+                            playing = False
+                            pass
                         else:
                             print("Please answer Y or N")
                     else:
-                        keep_playing = input("Would you like to keep playing? ")
+                        keep_playing = input("Would you like to keep playing? Y/N > ")
                         
                         if keep_playing == "Y":
                             level += 1
-                        elif keep_playing == "N":
-                            exit()
+                        elif keep_playing == "N" or keep_playing == "":
+                            player = None
+                            cprint("Now returning to main menu.", "magenta")
+                            time.sleep(1)
+                            playing = False
+                            pass
                         else:
                             print("Please answer Y or N")
                    
         elif choice == "2":
+            cprint(".................LEADERBOARD.................", "black", "on_light_cyan")
             list_all_players()
+            return_button = input("Press enter to return to main menu ")
+
+            if return_button == "":
+                pass
         elif choice == "3":
-            update_player()
+            list_all_levels()
         elif choice == "4":
             delete_player()
-        elif choice == "5":
-            list_all_levels()
-        elif choice == "6":
-            player_avg_accuracy()
-        elif choice == "7":
-            pass
-        elif choice == "8":
-            pass
+        # elif choice == "5":
+            # player_avg_accuracy()
+            # player_avg_time()
         else:
-            print("Invalid choice")
-
+            cprint("Invalid choice", "red")
 
 def menu():
     
-    print("0. Exit the program")
+    print("Main menu:")
+    print("0. Exit the game")
     print("1. New game")
-    print("2. List all players")
-    print("3. Update player")
+    print("2. Stats")
+    print("3. List all levels")
     print("4. Delete player")
-    print("5. List all levels")
-    print("6. Player average accuracy")
-    print("7. List of players by avg accuracy")
-    print("8. List of players by avg speed")
+    # print("5. Player average accuracy and time")
+    # print("6. Player average accuracy")
 
 if __name__ == "__main__":
     main()

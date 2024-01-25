@@ -10,6 +10,7 @@ class Player:
         self.id = id
         self.name = name
 
+    # Property name:
     @property
     def name(self):
         return self._name
@@ -24,6 +25,7 @@ class Player:
     def __repr__(self) -> str:
         return f"<Player {self.name}>"
     
+    # Class method to CREATE table:
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Player instances """
@@ -36,6 +38,7 @@ class Player:
         CURSOR.execute(sql)
         CONN.commit()
 
+    # Class method to DROP table:
     @classmethod
     def drop_table(cls):
         """ Drop the table that persists Player instances """
@@ -45,6 +48,7 @@ class Player:
         CURSOR.execute(sql)
         CONN.commit()
 
+    # Instance method to SAVE a new row into the db:
     def save(self):
         """ Insert a new row with the name value of the current Player instance.
         Update object id attribute using the primary key value of new row.
@@ -63,13 +67,17 @@ class Player:
         # Saves the instance to the "all_players" dictionary:
         type(self).all_players[self.id] = self
 
+    # Class method to create a new Player instance:
     @classmethod
     def create(cls, name):
         """ Initialize a new Player instance and save the object to the database """
         player = cls(name)
+
+        # Save to the db:
         player.save()
         return player
     
+    # Class method to update a new Player instance:
     def update(self):
         """Update the table row corresponding to the current Player instance."""
         sql = """
@@ -80,6 +88,7 @@ class Player:
         CURSOR.execute(sql, (self.name, self.id))
         CONN.commit()
 
+    # Class method to delete a new Player instance:
     def delete(self):
         """Delete the table row corresponding to the current Player instance,
         delete the dictionary entry, and reassign id attribute"""
@@ -98,6 +107,7 @@ class Player:
         # Set the id to None
         self.id = None
 
+    # Class method to instantiate a new Player from the db, taking in "row" as arg:
     @classmethod
     def instance_from_db(cls, row):
         """Return a Player object having the attribute values from the table row."""
@@ -114,6 +124,7 @@ class Player:
             cls.all_players[player.id] = player
         return player
 
+    # Class method to get all players:
     @classmethod
     def get_all(cls):
         """Return a list containing a Player object per row in the table"""
@@ -126,6 +137,7 @@ class Player:
 
         return [cls.instance_from_db(row) for row in rows]
 
+    # Class method to find a player by id:
     @classmethod
     def find_by_id(cls, id):
         """Return a Player object corresponding to the table row matching the specified primary key"""
@@ -138,6 +150,7 @@ class Player:
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
 
+    # Class method to find a player by name:
     @classmethod
     def find_by_name(cls, name):
         """Return a Player object corresponding to first table row matching specified name"""
@@ -150,7 +163,7 @@ class Player:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
-    # get list of games the player has played:
+    # Instance method to list all games the player has played:
     def games(self):
         """Return a list of Games played by the current instance"""
         from models.game import Game
@@ -163,18 +176,19 @@ class Player:
         CURSOR.execute(sql, (self.id,),)
 
         rows = CURSOR.fetchall()
-        return [
-            Game.instance_from_db(row) for row in rows
-        ]
+        return [Game.instance_from_db(row) for row in rows]
     
+    # Instance method to list the highest level a player has played:
     def highest_level_played(self):
         highest_level_id = max([game.level_id for game in self.games()])
-        return Level.find_by_id(highest_level_id)
+        return Level.find_by_id(highest_level_id).name
     
+    # Instance method to list the average accuracy of a player's games:
     def get_avg_accuracy(self):
         games_accuracy = [game.accuracy for game in self.games()]
         return sum(games_accuracy) / len(games_accuracy)
     
+    # Instance method to list the average time of a player's games:
     def get_avg_time(self):
-        games_times = [game.time for game in self.games()]
+        games_times = [float(game.time) for game in self.games()]
         return sum(games_times) / len(games_times)
