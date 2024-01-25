@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3ddfa7e750114d4600aad509dcac681728131c2beafc9e65f4b97fdc222a3220"
+            "sha256": "e5d357993cc6b053a29e4b5af1690e432082442c36d6485361b8402853065ccb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -64,12 +64,12 @@
         },
         "faker": {
             "hashes": [
-                "sha256:9abc6decb78dde54cccbad4432431b3caba796bd06950225da158e86c55855d3",
-                "sha256:b649d7b9b03e9e8283506411a56ecef124c8cd8d2bd300d8d7c858fa42350c4e"
+                "sha256:4e7bb19c1955bb978bf1d4cb0cf25930e37de0e7dfbc6abd768fd4784d9a9653",
+                "sha256:79cbe3be786789efa05b8c75d7e0ec4efa6ecb786b8fe90eae49c2f8f9cbe31a"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==22.4.0"
+            "version": "==22.5.1"
         },
         "iniconfig": {
             "hashes": [
@@ -145,11 +145,11 @@
         },
         "pluggy": {
             "hashes": [
-                "sha256:cf61ae8f126ac6f7c451172cf30e3e43d3ca77615509771b3a984a0730651e12",
-                "sha256:d89c696a773f8bd377d18e5ecda92b7a3793cbe66c87060a6fb58c7b6e1061f7"
+                "sha256:7db9f7b503d67d1c5b95f59773ebb58a8c1c288129a88665838012cfb07b8981",
+                "sha256:8c85c2876142a764e5b7548e7d9a0e0ddb46f5185161049a79b7e974454223be"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==1.3.0"
+            "version": "==1.4.0"
         },
         "prompt-toolkit": {
             "hashes": [
@@ -284,6 +284,15 @@
                 "sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695"
             ],
             "version": "==0.6.3"
+        },
+        "termcolor": {
+            "hashes": [
+                "sha256:9297c0df9c99445c2412e832e882a7884038a25617c60cea2ad69488d4040d63",
+                "sha256:aab9e56047c8ac41ed798fa36d892a37aca6b3e9159f3e0c24bc64a9b3ac7b7a"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==2.4.0"
         },
         "tomli": {
             "hashes": [

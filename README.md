@@ -22,6 +22,8 @@ Happy typing!
 ## 1. Introduction
 Python Typ-On is a fun and interactive project built in Python. The command-line interface makes it easy to play.
 
+[![image](./Python%20TypeOn%20v2.gif)]
+
 <a id="features"></a>
 
 ## 2. Features
