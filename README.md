@@ -16,6 +16,7 @@ Happy typing!
 - [3. Installation](#installation)
 - [4. Usage](#usage)
 - [5. Feedback and Support](#feedback)
+- [6. Skills learned](#skills)
 
 <a id="introduction"></a>
 
@@ -58,3 +59,25 @@ The main menu will guide you through the available options.
 We hope you enjoy the game! If you encounter any issues, have suggestions for improvement, or need assistance, please feel free to reach out.
 
 Thank you for playing! Happy typing!
+
+<a id="skills"></a>
+
+## 6. Skills learned
+
+Python and Object-Oriented Programming (OOP)
+- Building python classes with class properties and one-to-many relationships between classes:
+The game uses 3 classes, Player, Game, and Level. Player-Game and Level-Game are one-to-many relationships. Player-Level are many-to-many relationships.
+
+- Working with primary data types in Python: strings, integers, floats, lists, dictionaries.
+- Instance methods, and class methods, lambda functions.
+- Loops and conditionals, list comprehensions.
+
+Databases (SQLite3) and Object-Relational Mapping (ORM):
+- Writing and executing SQL against a database
+- Create/Drop tables, insert/update/delete table rows.
+- Associated tables using foreign keys.
+
+Using external libraries with my code:
+- Diff checker library: difflib library
+- Color printer: termcolor library
+- Timer: time library
