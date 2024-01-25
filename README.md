@@ -8,6 +8,8 @@ For each game you play, Python Typ-On shows the mistakes you made, and calculate
 
 The games and stats are then saved to an SQLite database, allowing you to see your overall average.
 
+Happy typing!
+
 **Table of contents:**
 - [1. Introduction](#introduction)
 - [2. Features](#features)
